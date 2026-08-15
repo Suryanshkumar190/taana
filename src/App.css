@@ -644,3 +644,473 @@
   .hero-stats { gap: 26px; }
   .section { padding: 64px 0; }
 }
+
+/* ---------- Product photos (added) ---------- */
+.product-photo {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  background: var(--khadi-deep);
+}
+
+.modal-gallery { display: flex; flex-direction: column; }
+
+.modal-photo {
+  height: 240px;
+  object-fit: cover;
+  display: block;
+  width: 100%;
+  background: var(--khadi-deep);
+}
+
+.modal-thumbs {
+  display: flex;
+  gap: 8px;
+  padding: 10px 26px 0;
+}
+
+.modal-thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  padding: 0;
+  flex: 0 0 auto;
+  opacity: 0.7;
+  transition: opacity 0.15s ease, border-color 0.15s ease;
+}
+
+.modal-thumb img,
+.modal-thumb svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.modal-thumb:hover { opacity: 1; }
+
+.modal-thumb.active {
+  opacity: 1;
+  border-color: var(--madder);
+}
+
+/* =========================================================
+   REDESIGN — Airbnb x Myntra hybrid
+   New class prefixes (pc-, cat-) sit alongside the original
+   CSS so nothing else on the page breaks.
+   ========================================================= */
+
+:root {
+  --radius-card: 18px;
+  --radius-pill: 999px;
+  --shadow-card: 0 1px 2px rgba(41, 36, 31, 0.06);
+  --shadow-card-hover: 0 20px 40px -18px rgba(41, 36, 31, 0.35);
+}
+
+/* ---------- Category pills (Airbnb-style) ---------- */
+.cat-section { padding-top: 36px; }
+
+.cat-scroll {
+  display: flex;
+  gap: 28px;
+  overflow-x: auto;
+  padding: 4px 4px 14px;
+  scrollbar-width: thin;
+}
+
+.cat-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  flex: 0 0 auto;
+  padding-bottom: 10px;
+  border-bottom: 2px solid transparent;
+  opacity: 0.72;
+  transition: opacity 0.15s ease, border-color 0.15s ease;
+}
+
+.cat-pill:hover { opacity: 1; }
+
+.cat-pill.active {
+  opacity: 1;
+  border-bottom-color: var(--indigo-deep);
+}
+
+.cat-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--khadi-deep);
+  border: 1px solid var(--thread-light);
+}
+
+.cat-avatar svg { width: 100%; height: 100%; }
+
+.cat-avatar-all {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--indigo-deep);
+  background: var(--paper);
+}
+
+.cat-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--indigo-deep);
+  white-space: nowrap;
+}
+
+/* ---------- Product grid (Myntra density) ---------- */
+.pc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px 20px;
+}
+
+.pc-card {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.pc-media {
+  position: relative;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: var(--khadi-deep);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.2s ease;
+}
+
+.pc-card:hover .pc-media { box-shadow: var(--shadow-card-hover); }
+
+.pc-open {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.pc-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.35s ease, transform 0.5s ease;
+}
+
+.pc-card:hover .pc-img:not(.pc-img-hover) { transform: scale(1.04); }
+
+.pc-img-hover {
+  opacity: 0;
+}
+
+.pc-card:hover .pc-img-hover { opacity: 1; }
+
+.pc-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--paper);
+  color: var(--indigo-deep);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 5px 10px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 2px 8px rgba(41, 36, 31, 0.18);
+}
+
+.pc-heart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(30, 42, 74, 0.28);
+  color: var(--paper);
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.pc-heart:hover { transform: scale(1.08); }
+
+.pc-heart.active { color: var(--madder); }
+.pc-heart.active svg path { fill: var(--madder); }
+
+.pc-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+  padding: 12px 2px 0;
+  background: none;
+  border: none;
+}
+
+.pc-info-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pc-cluster { color: var(--madder); }
+.pc-district { color: #9C9482; }
+.pc-district::before { content: "· "; }
+
+.pc-title {
+  font-size: 16px;
+  line-height: 1.3;
+  margin-top: 2px;
+  color: var(--indigo-deep);
+}
+
+.pc-weaver {
+  font-size: 12.5px;
+  color: #6B6455;
+}
+
+.pc-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 2px 0;
+}
+
+.pc-price-block { display: flex; flex-direction: column; }
+
+.pc-price {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--indigo-deep);
+}
+
+.pc-unit { font-size: 11px; color: #8A8272; }
+
+.pc-add {
+  border: 1px solid var(--indigo-deep);
+  color: var(--indigo-deep);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.pc-add:hover {
+  background: var(--indigo-deep);
+  color: var(--paper);
+  transform: translateY(-1px);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1080px) {
+  .pc-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 780px) {
+  .pc-grid { grid-template-columns: repeat(2, 1fr); gap: 22px 14px; }
+  .cat-avatar { width: 52px; height: 52px; }
+}
+
+@media (max-width: 460px) {
+  .pc-grid { grid-template-columns: repeat(2, 1fr); gap: 16px 10px; }
+  .pc-title { font-size: 14px; }
+  .pc-add { padding: 7px 14px; font-size: 12px; }
+}
+
+/* =========================================================
+   ROUND 2 — header polish + full-screen lightbox
+   ========================================================= */
+
+/* ---------- Header refresh ---------- */
+.header-accent {
+  display: flex;
+  height: 3px;
+  width: 100%;
+}
+.header-accent span { flex: 1; }
+
+.site-header {
+  background: linear-gradient(180deg, rgba(251, 248, 241, 0.97), rgba(242, 234, 217, 0.94));
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--thread-light);
+  box-shadow: 0 1px 0 rgba(41, 36, 31, 0.04), 0 12px 24px -20px rgba(41, 36, 31, 0.3);
+}
+
+.site-header-inner { height: 82px; }
+
+.logo {
+  gap: 12px;
+  font-size: 27px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.logo span { line-height: 1; }
+
+.site-nav a {
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.site-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  height: 1.5px;
+  background: var(--madder);
+  transition: right 0.2s ease;
+}
+
+.site-nav a:hover::after { right: 0; }
+
+.cart-trigger {
+  border: 1px solid var(--thread-light);
+  border-radius: var(--radius-pill, 999px);
+  padding: 9px 16px 9px 14px;
+  background: var(--paper);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cart-trigger:hover {
+  border-color: var(--indigo-deep);
+  box-shadow: 0 4px 14px -6px rgba(30, 42, 74, 0.35);
+}
+
+/* ---------- Full-screen photo lightbox ---------- */
+.modal-photo-btn {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: zoom-in;
+}
+
+.modal-expand-hint {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(30, 42, 74, 0.72);
+  color: var(--paper);
+  font-size: 11.5px;
+  font-weight: 500;
+  padding: 6px 11px;
+  border-radius: var(--radius-pill, 999px);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.modal-photo-btn:hover .modal-expand-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: rgba(15, 13, 10, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+
+.lightbox-img {
+  max-width: min(92vw, 1100px);
+  max-height: 88vh;
+  object-fit: contain;
+  border-radius: 4px;
+  cursor: default;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 22px;
+  right: 26px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--paper);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+.lightbox-close:hover { background: rgba(255, 255, 255, 0.22); }
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--paper);
+  font-size: 30px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+.lightbox-nav:hover { background: rgba(255, 255, 255, 0.22); }
+.lightbox-prev { left: 22px; }
+.lightbox-next { right: 22px; }
+
+.lightbox-counter {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 5px 12px;
+  border-radius: var(--radius-pill, 999px);
+}
+
+@media (max-width: 560px) {
+  .site-header-inner { height: 68px; }
+  .logo { font-size: 21px; }
+  .logo svg { width: 24px; height: 24px; }
+  .lightbox-nav { width: 40px; height: 40px; font-size: 24px; }
+  .lightbox-prev { left: 10px; }
+  .lightbox-next { right: 10px; }
+}

@@ -1,7 +1,7 @@
 import ProductCard from "./ProductCard";
 import { products, clusters } from "../data/products";
 
-export default function ProductGrid({ activeCluster, onAdd, onOpen }) {
+export default function ProductGrid({ activeCluster, onAdd, onOpen, wishlist, onToggleWishlist }) {
   const list = activeCluster ? products.filter((p) => p.cluster === activeCluster) : products;
   const clusterName = activeCluster ? clusters.find((c) => c.id === activeCluster)?.name : null;
 
@@ -16,9 +16,16 @@ export default function ProductGrid({ activeCluster, onAdd, onOpen }) {
           </p>
         </div>
 
-        <div className="product-grid">
+        <div className="pc-grid">
           {list.map((p) => (
-            <ProductCard key={p.id} product={p} onAdd={onAdd} onOpen={onOpen} />
+            <ProductCard
+              key={p.id}
+              product={p}
+              onAdd={onAdd}
+              onOpen={onOpen}
+              wishlisted={wishlist?.includes(p.id)}
+              onToggleWishlist={onToggleWishlist}
+            />
           ))}
         </div>
 

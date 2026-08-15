@@ -3,7 +3,7 @@ import { clusters } from "../data/products";
 
 export default function Categories({ activeCluster, onSelect }) {
   return (
-    <section className="section clusters" id="weavers">
+    <section className="section cat-section" id="weavers">
       <div className="wrap">
         <div className="section-head">
           <h2>Six weaves, six districts, no two looms alike.</h2>
@@ -13,25 +13,25 @@ export default function Categories({ activeCluster, onSelect }) {
           </p>
         </div>
 
-        <div className="cluster-row">
+        <div className="cat-scroll">
           <button
-            className={"cluster-card cluster-all" + (activeCluster === null ? " active" : "")}
+            className={"cat-pill" + (activeCluster === null ? " active" : "")}
             onClick={() => onSelect(null)}
           >
-            <span className="cluster-all-label">All weaves</span>
+            <span className="cat-avatar cat-avatar-all">All</span>
+            <span className="cat-label">All weaves</span>
           </button>
 
           {clusters.map((c) => (
             <button
               key={c.id}
-              className={"cluster-card" + (activeCluster === c.id ? " active" : "")}
+              className={"cat-pill" + (activeCluster === c.id ? " active" : "")}
               onClick={() => onSelect(c.id)}
             >
-              <Swatch {...c.swatch} className="cluster-swatch" />
-              <span className="cluster-meta">
-                <strong>{c.name}</strong>
-                <em>{c.state}</em>
+              <span className="cat-avatar">
+                <Swatch {...c.swatch} />
               </span>
+              <span className="cat-label">{c.name}</span>
             </button>
           ))}
         </div>

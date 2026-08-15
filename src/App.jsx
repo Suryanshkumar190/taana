@@ -12,6 +12,7 @@ import ChatWidget from "./components/ChatWidget";
 import "./App.css";
 
 const STORAGE_KEY = "taana-cart-v1";
+const WISHLIST_KEY = "taana-wishlist-v1";
 
 export default function App() {
   const [activeCluster, setActiveCluster] = useState(null);
@@ -26,6 +27,14 @@ export default function App() {
       return [];
     }
   });
+  const [wishlist, setWishlist] = useState(() => {
+    try {
+      const saved = localStorage.getItem(WISHLIST_KEY);
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
 
   useEffect(() => {
     try {
@@ -34,6 +43,14 @@ export default function App() {
       /* storage unavailable, ignore */
     }
   }, [cart]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(WISHLIST_KEY, JSON.stringify(wishlist));
+    } catch {
+      /* storage unavailable, ignore */
+    }
+  }, [wishlist]);
 
   function addToCart(product) {
     setCart((prev) => {
@@ -55,6 +72,10 @@ export default function App() {
     setCart((prev) => prev.filter((i) => i.id !== id));
   }
 
+  function toggleWishlist(id) {
+    setWishlist((prev) => (prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]));
+  }
+
   const cartCount = cart.reduce((sum, i) => sum + i.qty, 0);
 
   function askAIAbout(question) {
@@ -68,7 +89,13 @@ export default function App() {
       <main>
         <Hero />
         <Categories activeCluster={activeCluster} onSelect={setActiveCluster} />
-        <ProductGrid activeCluster={activeCluster} onAdd={addToCart} onOpen={setOpenProduct} />
+        <ProductGrid
+          activeCluster={activeCluster}
+          onAdd={addToCart}
+          onOpen={setOpenProduct}
+          wishlist={wishlist}
+          onToggleWishlist={toggleWishlist}
+        />
         <ArtisanStory />
         <HowItWorks />
       </main>
