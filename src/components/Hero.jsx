@@ -20,6 +20,16 @@ export default function Hero() {
       </div>
 
       <div className="wrap hero-inner">
+        <div className="hero-motif" aria-hidden="true">
+          <span className="motif-line" />
+          <span className="motif-dot" />
+          <span className="motif-diamond">❖</span>
+          <span className="motif-dot" />
+          <span className="motif-line" />
+        </div>
+
+        <p className="hero-kicker">परंपरा · हस्तकला · विरासत — tradition, woven by hand</p>
+
         <span className="eyebrow">Handloom, bought direct</span>
         <h1>
           Every piece has<br />a weaver's name on it.
@@ -33,21 +43,6 @@ export default function Hero() {
           <a href="#shop" className="btn btn-primary">Explore the collection</a>
           <a href="#weavers" className="btn btn-ghost">Meet the weavers</a>
         </div>
-
-        <dl className="hero-stats">
-          <div>
-            <dt>Weave clusters</dt>
-            <dd>6 states</dd>
-          </div>
-          <div>
-            <dt>Weavers onboarded</dt>
-            <dd>140+</dd>
-          </div>
-          <div>
-            <dt>Cut to weaver</dt>
-            <dd>No commission on first sale</dd>
-          </div>
-        </dl>
       </div>
     </section>
   );

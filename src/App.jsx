@@ -90,7 +90,6 @@ export default function App() {
       <main>
         <Hero />
         <BorderMotif />
-        <Categories activeCluster={activeCluster} onSelect={setActiveCluster} />
         <ProductGrid
           activeCluster={activeCluster}
           onAdd={addToCart}
@@ -100,6 +99,7 @@ export default function App() {
         />
         <ArtisanStory />
         <HowItWorks />
+        <Categories activeCluster={activeCluster} onSelect={setActiveCluster} />
       </main>
       <Footer />
       <CartDrawer

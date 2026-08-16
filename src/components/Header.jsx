@@ -8,12 +8,24 @@ export default function Header({ cartCount, onCartClick }) {
       </div>
       <div className="wrap site-header-inner">
         <a href="#top" className="logo">
-          <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
-            <line x1="4" y1="0" x2="4" y2="22" stroke="var(--madder)" strokeWidth="1.4" />
-            <line x1="11" y1="0" x2="11" y2="22" stroke="var(--indigo-deep)" strokeWidth="1.4" />
-            <line x1="18" y1="0" x2="18" y2="22" stroke="var(--turmeric)" strokeWidth="1.4" />
-          </svg>
-          <span>Taana</span>
+          <span className="logo-mark">
+            <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+              <rect x="1" y="1" width="32" height="32" rx="7" fill="var(--indigo-deep)" />
+              <g stroke="var(--khadi)" strokeWidth="1.5" strokeLinecap="round">
+                <line x1="9" y1="6" x2="9" y2="28" />
+                <line x1="17" y1="6" x2="17" y2="28" />
+                <line x1="25" y1="6" x2="25" y2="28" />
+              </g>
+              <g stroke="var(--turmeric)" strokeWidth="1.5" strokeLinecap="round">
+                <line x1="5" y1="12" x2="29" y2="12" />
+                <line x1="5" y1="22" x2="29" y2="22" />
+              </g>
+              <circle cx="17" cy="17" r="2.4" fill="var(--madder)" />
+            </svg>
+          </span>
+          <span className="logo-word">
+            Taana<span className="logo-dot">.</span>
+          </span>
         </a>
 
         <nav className="site-nav">

@@ -24,11 +24,28 @@
 .logo {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 11px;
   font-family: var(--font-display);
-  font-size: 21px;
-  font-weight: 600;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: var(--indigo-deep);
+}
+
+.logo-mark {
+  display: flex;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.logo:hover .logo-mark { transform: rotate(-4deg) scale(1.04); }
+.logo:hover .logo-mark rect { fill: var(--madder-deep); }
+
+.logo-word { position: relative; top: 1px; }
+
+.logo-dot {
+  color: var(--turmeric);
+  font-size: 1.1em;
 }
 
 .site-nav {
@@ -95,6 +112,43 @@
 }
 
 .hero-inner { position: relative; max-width: 680px; }
+
+.hero-motif {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.hero-motif .motif-line {
+  width: 34px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--madder));
+}
+.hero-motif .motif-line:last-child { background: linear-gradient(90deg, var(--madder), transparent); }
+
+.hero-motif .motif-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--turmeric);
+}
+
+.hero-motif .motif-diamond {
+  color: var(--madder);
+  font-size: 14px;
+  line-height: 1;
+}
+
+.hero-kicker {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--indigo-deep);
+  opacity: 0.7;
+  margin-bottom: 14px;
+}
 
 .hero-inner h1 {
   font-size: clamp(38px, 6vw, 64px);
@@ -195,6 +249,150 @@
 }
 
 .cluster-all-label { font-family: var(--font-display); font-size: 15px; padding: 20px; }
+
+/* ---------- Closing weave collective section ---------- */
+.cat-section {
+  position: relative;
+  background: var(--khadi);
+  overflow: hidden;
+}
+
+.cat-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    135deg,
+    var(--thread) 0px,
+    var(--thread) 1px,
+    transparent 1px,
+    transparent 16px
+  );
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.cat-motif {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+.cat-motif .motif-line {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--madder));
+}
+.cat-motif .motif-line:last-child { background: linear-gradient(90deg, var(--madder), transparent); }
+
+.cat-motif .motif-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--turmeric);
+}
+
+.cat-motif .motif-diamond {
+  color: var(--madder);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.cat-section .wrap { position: relative; }
+
+.cat-section .section-head h2 { font-size: clamp(30px, 3.6vw, 44px); }
+
+.cat-scroll {
+  position: relative;
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+}
+
+.cat-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  padding: 7px 20px 7px 7px;
+  border-radius: 999px;
+  background: var(--paper);
+  border: 1px solid var(--thread-light);
+  transition: border-color 0.15s ease, transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cat-pill:hover {
+  transform: translateY(-2px);
+  border-color: var(--madder);
+  box-shadow: 0 10px 20px -14px rgba(41, 36, 31, 0.35);
+}
+
+.cat-pill.active {
+  background: var(--indigo-deep);
+  border-color: var(--indigo-deep);
+}
+
+.cat-pill.active .cat-label { color: var(--paper); }
+
+.cat-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--thread-light);
+  background: var(--off-white);
+}
+
+.cat-avatar-all {
+  background: var(--indigo-deep);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.cat-label {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--indigo-deep);
+  white-space: nowrap;
+}
+
+.cat-stats {
+  position: relative;
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+  margin-top: 60px;
+  padding-top: 32px;
+  border-top: 1px solid var(--thread);
+}
+
+.cat-stats dt {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6B6455;
+}
+
+.cat-stats dd {
+  margin: 8px 0 0;
+  font-family: var(--font-display);
+  font-size: 23px;
+  color: var(--indigo-deep);
+  font-weight: 700;
+}
 
 /* ---------- Product grid (dense, Myntra-style density + Taana palette) ---------- */
 .mc-grid {
@@ -778,5 +976,6 @@
   .mc-grid { grid-template-columns: repeat(2, 1fr); gap: 14px 10px; }
   .mc-img { height: 150px; }
   .hero-stats { gap: 26px; }
+  .cat-stats { gap: 26px; margin-top: 40px; }
   .section { padding: 64px 0; }
 }
