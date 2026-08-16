@@ -1,3 +1,7 @@
+// Weave clusters featured on the site. Each has a base CSS pattern
+// signature — colors + motif genuinely associated with the weave —
+// which every product in that cluster then varies (see Swatch.jsx),
+// so no two products, even within the same cluster, render identically.
 export const clusters = [
   {
     id: "banarasi",
@@ -43,120 +47,147 @@ export const clusters = [
   },
 ];
 
-function commons(file, width = 900) {
-  return `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=${width}`;
-}
+// ---------------------------------------------------------------------
+// Product generation. Real saree sub-type / technique names per cluster,
+// combined with a rotating list of weaver houses and cooperatives, build
+// a 100-item catalog deterministically (same output every build). Each
+// product carries a `seed` used only to vary its generated swatch — a
+// hue rotation + pattern-scale tweak — so within a cluster no two
+// products render the same swatch either. There are no sourced photos
+// anywhere in this file, which is what guarantees zero duplicate images:
+// nothing here is fetched or reused, everything is drawn from the data.
+// ---------------------------------------------------------------------
 
-// COVER photos = always an actual saree/textile/garment shot. This pool
-// is the only thing allowed at images[0], so a product card's thumbnail
-// is never a loom or machine.
-const COVERS = {
-  banarasi: [
-    commons("Banarasi Silk Saree.jpg"),
-    commons("Banarasi sari pallu by ashish4.JPG"),
-    commons("Saree on display at Dilli Haat.JPG"),
-  ],
-  kanjeevaram: [
-    commons("Kanchipuram silk sareer.JPG"),
-    commons("Original pattu saree trademark.jpg"),
-  ],
-  chanderi: [
-    commons("KASHTHA SAREE.jpg"),
-    commons("Indian Saree kuchu knots.jpg"),
-  ],
-  ikat: [
-    commons("Pochampalli Ikat saree.jpg"),
-    commons("Indian Saree kuchu knots.jpg"),
-  ],
-  ajrakh: [
-    commons("Ajrak.jpg"),
-    commons("KASHTHA SAREE.jpg"),
-  ],
-  jamdani: [
-    commons("Bangladeshi bride in Jamdani sari.jpg"),
-    commons("KASHTHA SAREE.jpg"),
-  ],
+const CLUSTER_DEFS = {
+  banarasi: {
+    types: [
+      "Meenakari Zari", "Katan Silk", "Tissue Zari Wedding", "Butidar Brocade",
+      "Cutwork Cotton-Silk", "Tanchoi Silk", "Kadhwa Brocade", "Jangla Silk",
+      "Alfi Zari", "Shikargah Motif", "Rangkat Silk", "Organza Zari",
+      "Georgette Zari", "Konia Border", "Ganga-Jamuna Border", "Resham Booti", "Diagonal Stripe",
+    ],
+    weavers: [
+      "Rehmat Textiles, Varanasi", "Ansari Zari House, Varanasi",
+      "Gangajali Weaves, Varanasi", "Banaras Heritage Looms", "Kashi Zari Karkhana",
+    ],
+    units: ["saree", "saree", "saree", "stole", "saree", "dupatta"],
+    basePrice: 6800, step: 950,
+  },
+  kanjeevaram: {
+    types: [
+      "Korvai Temple-Border", "Thread-Brocade Bridal", "Checked Pattu", "Pure Mulberry Silk",
+      "Contrast Pallu Silk", "Vairaoosi Motif", "Rettapet Zari", "Peacock Motif",
+      "Mango Motif", "Gopuram Motif", "Rudraksham Motif", "Small-Border Silk",
+      "Big-Border Bridal", "Paisley Motif", "Zari-Heavy Bridal", "Plain Zari-Border", "Two-Tone Silk",
+    ],
+    weavers: [
+      "Lakshmi Silk Weavers, Kanchipuram", "Sri Meenakshi Silks, Kanchipuram",
+      "Arani Handloom Cooperative", "Thiruvanaikoil Silk House", "Kumarapalayam Weavers Guild",
+    ],
+    units: ["saree"],
+    basePrice: 14500, step: 1150,
+  },
+  chanderi: {
+    types: [
+      "Sheer", "Silk-Cotton", "Booti", "Zari-Border", "Tissue", "Pure Silk",
+      "Hand-Block Print", "Peacock Booti", "Coin (Ashrafi) Booti", "Floral (Genda) Booti",
+      "Mango (Keri) Booti", "Gold Booti", "Checked Silk-Cotton", "Plain Zari-Edge",
+      "Two-Tone Sheer", "Butta Motif",
+    ],
+    weavers: [
+      "Baghora Handlooms, Ashoknagar", "Chanderiyaan Weavers Trust",
+      "Chanderi Silk Cooperative", "Ashoknagar Handloom Society",
+    ],
+    units: ["saree", "dupatta", "saree", "stole", "saree", "running fabric"],
+    basePrice: 2200, step: 420,
+  },
+  ikat: {
+    types: [
+      "Double Ikat Pochampally", "Telia Rumal", "Single Ikat Cotton", "Pochampally Silk",
+      "Diamond Ikat", "Temple-Border Ikat", "Bhoodan Pochampally", "Ikat Tussar Silk",
+      "Checked Ikat", "Geometric Ikat", "Ikat Cotton Cushion", "Ikat Running Fabric",
+      "Sunburst Ikat", "Chevron Ikat", "Ikat Silk-Cotton", "Broad-Border Ikat", "Ripple Ikat",
+    ],
+    weavers: [
+      "Nalgonda Weavers Collective", "Puttapaka Ikat Cooperative",
+      "Bhoodan Pochampally Society", "Telangana Ikat Guild",
+    ],
+    units: ["saree", "stole", "saree", "running fabric", "saree", "home"],
+    basePrice: 1400, step: 480,
+  },
+  ajrakh: {
+    types: [
+      "Block-Print Running Fabric", "Modal Silk", "Cotton", "Indigo",
+      "Madder-Dye Cotton", "Cotton Mulmul", "Kutch Hand-Block", "Natural-Dye Cotton",
+      "Geometric Print", "Floral Block-Print", "Trellis Print", "Star Motif",
+      "Indigo-Madder Dupatta", "Hand-Block Bedcover", "Double-Dye Cotton", "Rosette Print", "Border Print",
+    ],
+    weavers: [
+      "Khatri Ajrakh House, Dhamadka", "Ajrakhpur Printers Guild",
+      "Kutch Block Print Cooperative", "Dhamadka Hand-Block Society",
+    ],
+    units: ["running fabric", "saree", "dupatta", "stole", "saree", "home"],
+    basePrice: 1250, step: 380,
+  },
+  jamdani: {
+    types: [
+      "Motif Cotton", "Silk-Cotton", "Dhakai", "Cotton Stole", "Booti Dupatta",
+      "Nakshi Motif", "Fine-Count", "Zari Jamdani", "Tangail-Style", "Half-Silk",
+      "Floral Butta", "Paisley Motif", "Checked Cotton", "Plain-Border Cotton", "Two-Tone Silk-Cotton", "Rich Pallu",
+    ],
+    weavers: [
+      "Phulia Jamdani Cooperative", "Shantipur Jamdani Weavers",
+      "Tangail Jamdani Society", "Nadia Handloom Trust",
+    ],
+    units: ["saree", "saree", "stole", "dupatta", "saree", "saree"],
+    basePrice: 2600, step: 650,
+  },
 };
 
-// DETAIL photos = loom/process/texture shots. Shown only as the 2nd/3rd
-// image in a product's gallery, never as the card cover.
-const DETAILS = {
-  banarasi: [commons("India - Varanasi loom - 0987.jpg")],
-  kanjeevaram: [
-    commons("Silk Sari Weaving at Kanchipuram, Tamil Nadu.jpg"),
-    commons("Complicated hand-loom for silk weaving, Kanchipuram, Tamil Nadu.jpg"),
-  ],
-  chanderi: [
-    commons("A man weaving the famous handloom Chanderi Saree.jpg"),
-    commons("Looms at Rehwa society, Maheshwari handloom sarees weavers society, Maheshwar.jpg"),
-    commons("Saree Weaving by Handloom 3.jpg"),
-  ],
-  ikat: [
-    commons("Saree Weaving by Handloom 3.jpg"),
-    commons("Assamese woman using traditional handloom.jpg"),
-  ],
-  ajrakh: [
-    commons("Looms at Rehwa society, Maheshwari handloom sarees weavers society, Maheshwar.jpg"),
-  ],
-  jamdani: [
-    commons("The delicate process of making a Jamdani saree has been passed down from generation to generation.jpg"),
-  ],
+const UNIT_LABELS = {
+  saree: (i) => `${(5.5 + (i % 3) * 0.4).toFixed(1)}m saree`,
+  stole: () => "2.2m stole",
+  dupatta: () => "2.4m dupatta",
+  "running fabric": () => "per metre",
+  home: (i) => (i % 2 === 0 ? "set of 2" : "single bedcover"),
 };
 
-// Builds a per-product gallery: cover photo first (rotated by `index` so
-// products in the same cluster don't all show the same lead photo),
-// a second cover if one exists, then up to two process/detail shots.
-function galleryFor(clusterId, index) {
-  const covers = COVERS[clusterId];
-  const details = DETAILS[clusterId] || [];
-  const primary = covers[index % covers.length];
-  const secondary = covers.length > 1 ? covers[(index + 1) % covers.length] : null;
-  return [primary, secondary, ...details.slice(0, 2)].filter(Boolean);
+const TAGS = [null, null, "New", null, "Best seller", null, null, "Everyday", null, "Bridal"];
+
+function buildCluster(clusterId) {
+  const def = CLUSTER_DEFS[clusterId];
+  const list = [];
+  def.types.forEach((type, i) => {
+    const unitKind = def.units[i % def.units.length];
+    const unit = UNIT_LABELS[unitKind](i);
+    const price = Math.round((def.basePrice + i * def.step) / 10) * 10;
+    const discountPct = [10, 15, 20, 12, 25, 18, 30, 15][i % 8];
+    const mrp = Math.round((price / (1 - discountPct / 100)) / 10) * 10;
+    const rating = Math.min(4.9, +(3.8 + ((i * 7) % 11) * 0.09).toFixed(1));
+    const reviews = 24 + ((i * 53) % 480);
+    const weaver = def.weavers[i % def.weavers.length];
+    const tag = unitKind === "saree" ? TAGS[i % TAGS.length] : null;
+    const suffix = unitKind === "saree" ? "Saree" : unitKind === "home" ? "" : unitKind.replace(/^\w/, (c) => c.toUpperCase());
+
+    list.push({
+      id: `${clusterId}-${i + 1}`,
+      name: `${type} ${suffix}`.trim(),
+      cluster: clusterId,
+      weaver,
+      price,
+      mrp,
+      discountPct,
+      rating,
+      reviews,
+      unit,
+      tag,
+      seed: i, // drives this product's unique swatch variation — see Swatch.jsx
+    });
+  });
+  return list;
 }
 
-export const products = [
-  // ---------- Banarasi ----------
-  { id: "p1", name: "Meenakari Zari Saree", cluster: "banarasi", weaver: "Rehmat Textiles, Varanasi", price: 18400, unit: "6.3m saree", tag: "Best seller", images: galleryFor("banarasi", 0) },
-  { id: "p2", name: "Banarasi Katan Silk Stole", cluster: "banarasi", weaver: "Rehmat Textiles, Varanasi", price: 5400, unit: "2.2m stole", images: galleryFor("banarasi", 1) },
-  { id: "p3", name: "Tissue Zari Wedding Saree", cluster: "banarasi", weaver: "Ansari Zari House, Varanasi", price: 21900, unit: "6.3m saree", tag: "Bridal", images: galleryFor("banarasi", 2) },
-  { id: "p4", name: "Butidar Brocade Saree", cluster: "banarasi", weaver: "Gangajali Weaves, Varanasi", price: 16750, unit: "6.3m saree", images: galleryFor("banarasi", 0) },
-  { id: "p5", name: "Cutwork Cotton-Silk Saree", cluster: "banarasi", weaver: "Rehmat Textiles, Varanasi", price: 8200, unit: "6m saree", tag: "Everyday", images: galleryFor("banarasi", 1) },
-
-  // ---------- Kanjeevaram ----------
-  { id: "p6", name: "Korvai Temple-Border Saree", cluster: "kanjeevaram", weaver: "Lakshmi Silk Weavers, Kanchipuram", price: 24900, unit: "6.3m saree", images: galleryFor("kanjeevaram", 0) },
-  { id: "p7", name: "Thread-Brocade Bridal Saree", cluster: "kanjeevaram", weaver: "Sri Meenakshi Silks, Kanchipuram", price: 32500, unit: "6.3m saree", tag: "Bridal", images: galleryFor("kanjeevaram", 1) },
-  { id: "p8", name: "Checked Silk Saree", cluster: "kanjeevaram", weaver: "Lakshmi Silk Weavers, Kanchipuram", price: 15600, unit: "6.3m saree", images: galleryFor("kanjeevaram", 0) },
-  { id: "p9", name: "Pure Mulberry Silk Saree", cluster: "kanjeevaram", weaver: "Arani Handloom Cooperative", price: 19800, unit: "6.3m saree", tag: "New", images: galleryFor("kanjeevaram", 1) },
-  { id: "p10", name: "Contrast Pallu Silk Saree", cluster: "kanjeevaram", weaver: "Sri Meenakshi Silks, Kanchipuram", price: 21200, unit: "6.3m saree", images: galleryFor("kanjeevaram", 0) },
-
-  // ---------- Chanderi ----------
-  { id: "p11", name: "Chanderi Sheer Dupatta", cluster: "chanderi", weaver: "Baghora Handlooms, Ashoknagar", price: 3200, unit: "2.5m dupatta", tag: "New", images: galleryFor("chanderi", 0) },
-  { id: "p12", name: "Chanderi Silk-Cotton Saree", cluster: "chanderi", weaver: "Baghora Handlooms, Ashoknagar", price: 6800, unit: "5.5m saree", images: galleryFor("chanderi", 1) },
-  { id: "p13", name: "Chanderi Booti Saree", cluster: "chanderi", weaver: "Chanderiyaan Weavers Trust", price: 7400, unit: "5.5m saree", images: galleryFor("chanderi", 2) },
-  { id: "p14", name: "Chanderi Zari-Border Stole", cluster: "chanderi", weaver: "Baghora Handlooms, Ashoknagar", price: 2650, unit: "2.2m stole", images: galleryFor("chanderi", 0) },
-  { id: "p15", name: "Chanderi Handloom Running Fabric", cluster: "chanderi", weaver: "Chanderiyaan Weavers Trust", price: 1450, unit: "per metre", images: galleryFor("chanderi", 1) },
-
-  // ---------- Ikat ----------
-  { id: "p16", name: "Double Ikat Pochampally Stole", cluster: "ikat", weaver: "Nalgonda Weavers Collective", price: 4650, unit: "2.1m stole", images: galleryFor("ikat", 0) },
-  { id: "p17", name: "Ikat Cotton Cushion Cover Set", cluster: "ikat", weaver: "Nalgonda Weavers Collective", price: 1650, unit: "set of 2", tag: "Home", images: galleryFor("ikat", 1) },
-  { id: "p18", name: "Telia Rumal Ikat Saree", cluster: "ikat", weaver: "Puttapaka Ikat Cooperative", price: 9200, unit: "5.8m saree", images: galleryFor("ikat", 0) },
-  { id: "p19", name: "Pochampally Ikat Silk Saree", cluster: "ikat", weaver: "Nalgonda Weavers Collective", price: 13400, unit: "6m saree", tag: "Best seller", images: galleryFor("ikat", 1) },
-  { id: "p20", name: "Ikat Cotton Running Fabric", cluster: "ikat", weaver: "Puttapaka Ikat Cooperative", price: 1180, unit: "per metre", images: galleryFor("ikat", 0) },
-
-  // ---------- Ajrakh ----------
-  { id: "p21", name: "Ajrakh Block-Print Running Fabric", cluster: "ajrakh", weaver: "Khatri Ajrakh House, Dhamadka", price: 2850, unit: "per metre", images: galleryFor("ajrakh", 0) },
-  { id: "p22", name: "Ajrakh Modal Silk Saree", cluster: "ajrakh", weaver: "Khatri Ajrakh House, Dhamadka", price: 6900, unit: "5.8m saree", tag: "New", images: galleryFor("ajrakh", 1) },
-  { id: "p23", name: "Ajrakh Cotton Dupatta", cluster: "ajrakh", weaver: "Ajrakhpur Printers Guild", price: 1950, unit: "2.4m dupatta", images: galleryFor("ajrakh", 0) },
-  { id: "p24", name: "Ajrakh Indigo Bedcover", cluster: "ajrakh", weaver: "Ajrakhpur Printers Guild", price: 4200, unit: "single bedcover", tag: "Home", images: galleryFor("ajrakh", 1) },
-  { id: "p25", name: "Ajrakh Hand-Block Stole", cluster: "ajrakh", weaver: "Khatri Ajrakh House, Dhamadka", price: 2100, unit: "2.2m stole", images: galleryFor("ajrakh", 0) },
-
-  // ---------- Jamdani ----------
-  { id: "p26", name: "Jamdani Motif Cotton Saree", cluster: "jamdani", weaver: "Phulia Jamdani Cooperative", price: 7900, unit: "5.5m saree", images: galleryFor("jamdani", 0) },
-  { id: "p27", name: "Jamdani Silk-Cotton Saree", cluster: "jamdani", weaver: "Phulia Jamdani Cooperative", price: 11200, unit: "5.5m saree", tag: "Best seller", images: galleryFor("jamdani", 1) },
-  { id: "p28", name: "Dhakai Jamdani Saree", cluster: "jamdani", weaver: "Shantipur Jamdani Weavers", price: 15800, unit: "6m saree", tag: "Bridal", images: galleryFor("jamdani", 0) },
-  { id: "p29", name: "Jamdani Cotton Stole", cluster: "jamdani", weaver: "Phulia Jamdani Cooperative", price: 2400, unit: "2.2m stole", images: galleryFor("jamdani", 1) },
-  { id: "p30", name: "Jamdani Booti Dupatta", cluster: "jamdani", weaver: "Shantipur Jamdani Weavers", price: 2950, unit: "2.4m dupatta", tag: "New", images: galleryFor("jamdani", 0) },
-];
+export const products = Object.keys(CLUSTER_DEFS).flatMap(buildCluster);
 
 export function formatINR(amount) {
   return "\u20B9" + amount.toLocaleString("en-IN");

@@ -8,10 +8,10 @@ export default function Header({ cartCount, onCartClick }) {
       </div>
       <div className="wrap site-header-inner">
         <a href="#top" className="logo">
-          <svg width="30" height="30" viewBox="0 0 22 22" aria-hidden="true">
-            <line x1="4" y1="0" x2="4" y2="22" stroke="var(--madder)" strokeWidth="1.8" />
-            <line x1="11" y1="0" x2="11" y2="22" stroke="var(--indigo-deep)" strokeWidth="1.8" />
-            <line x1="18" y1="0" x2="18" y2="22" stroke="var(--turmeric)" strokeWidth="1.8" />
+          <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+            <line x1="4" y1="0" x2="4" y2="22" stroke="var(--madder)" strokeWidth="1.4" />
+            <line x1="11" y1="0" x2="11" y2="22" stroke="var(--indigo-deep)" strokeWidth="1.4" />
+            <line x1="18" y1="0" x2="18" y2="22" stroke="var(--turmeric)" strokeWidth="1.4" />
           </svg>
           <span>Taana</span>
         </a>

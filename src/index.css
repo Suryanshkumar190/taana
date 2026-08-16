@@ -1,6 +1,8 @@
 :root {
   --khadi: #F2EAD9;
   --khadi-deep: #E8DCC3;
+  --white: #FFFFFF;
+  --off-white: #FAF9F6;
   --indigo: #2B3A67;
   --indigo-deep: #1E2A4A;
   --madder: #A63D40;
@@ -8,8 +10,8 @@
   --turmeric: #E9B44C;
   --charcoal: #29241F;
   --thread: #C9BBA0;
-  --thread-light: #DCD1B8;
-  --paper: #FBF8F1;
+  --thread-light: #E4E0D5;
+  --paper: #FFFFFF;
 
   --font-display: "Fraunces", serif;
   --font-body: "Inter", sans-serif;
@@ -29,7 +31,7 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: var(--khadi);
+  background: var(--white);
   color: var(--charcoal);
   font-family: var(--font-body);
   font-size: 16px;

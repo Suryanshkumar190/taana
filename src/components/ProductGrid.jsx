@@ -16,7 +16,7 @@ export default function ProductGrid({ activeCluster, onAdd, onOpen, wishlist, on
           </p>
         </div>
 
-        <div className="pc-grid">
+        <div className="mc-grid">
           {list.map((p) => (
             <ProductCard
               key={p.id}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import BorderMotif from "./components/BorderMotif";
 import Categories from "./components/Categories";
 import ProductGrid from "./components/ProductGrid";
 import ArtisanStory from "./components/ArtisanStory";
@@ -88,6 +89,7 @@ export default function App() {
       <Header cartCount={cartCount} onCartClick={() => setCartOpen(true)} />
       <main>
         <Hero />
+        <BorderMotif />
         <Categories activeCluster={activeCluster} onSelect={setActiveCluster} />
         <ProductGrid
           activeCluster={activeCluster}
